@@ -18,8 +18,8 @@
         :placeholder="label"
         :disabled="disabled"
         :style="[getBorderStyle]"
+        :class="customInputClass"
         type="text"
-        class="field-input"
         readonly
         @focus="onFocus"
       >
@@ -102,20 +102,16 @@
   import moment from 'moment-timezone'
   import CtkDatePickerAgenda from './_subs/CtkDatePickerAgenda'
   import CtkDateRangePicker from './_subs/CtkDateRangePicker'
-
   const nearestMinutes = (interval, someMoment, m) => {
     const roundedMinutes = Math.ceil(someMoment.minute() / interval) * interval
     return m(someMoment.clone().minute(roundedMinutes).second(0))
   }
-
   const getDefaultTZ = () => {
     return moment.tz.guess() || 'America/Los_Angeles'
   }
-
   const getDefaultLocale = () => {
     return (window.navigator.userLanguage || window.navigator.language || 'en').substr(0, 2)
   }
-
   export default {
     name: 'VueCtkDateTimePicker',
     components: {
@@ -126,7 +122,7 @@
       label: { type: String, default: 'Select date & time' },
       hint: { type: String, default: String },
       errorHint: { type: Boolean, default: Boolean },
-      value: { type: [String, Object], required: false, default: null },
+      value: { type: [String, Object, Date], required: false, default: null },
       formatted: { type: String, default: 'llll' },
       format: { type: String, default: String },
       locale: { type: String, default: getDefaultLocale() },
@@ -152,7 +148,8 @@
       overlayBackground: {type: Boolean, default: false},
       withoutRangeShortcut: {type: Boolean, default: false},
       dark: {type: Boolean, default: false},
-      shortcutsTranslation: {type: Object, default: Object}
+      shortcutsTranslation: {type: Object, default: Object},
+      inputClass: {type: [String, Object, Array], default: ''}
     },
     data () {
       return {
@@ -178,6 +175,9 @@
         return cond
           ? { borderColor: this.color }
           : null
+      },
+      customInputClass () {
+        return this.inputClass
       },
       dateTime () {
         return this.rangeMode ? this.getRangeDatesTime() : this.getDateTime()
@@ -255,13 +255,10 @@
         const rect = this.$refs.parent.getBoundingClientRect()
         const windowHeight = window.innerHeight
         let datePickerHeight = 428
-
         datePickerHeight = !this.enableButtonValidate ? 428 - 46 : datePickerHeight
         datePickerHeight = this.withoutHeader ? 428 - 65 : datePickerHeight
-
         const position = ((windowHeight - (rect.top + rect.height)) > datePickerHeight) || ((windowHeight - rect.top) > windowHeight / 2 + rect.height)
         this.agendaPosition = position ? 'top' : 'bottom'
-
         this.isVisible = true
       },
       hideDatePicker () {
@@ -290,7 +287,7 @@
 </script>
 
 <style lang="scss">
-  @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+  @import url('//fonts.googleapis.com/css?family=Roboto:400,500,700');
   @import "./assets/main.scss";
   .ctk-date-time-picker {
     width: 100%;
@@ -327,24 +324,6 @@
         transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
         font-size: 11px;
         color: rgba(0, 0, 0, 0.54);
-      }
-      .field-input{
-        cursor: pointer;
-        background-color: #FFF;
-        -webkit-transition-duration: 0.3s;
-        transition-duration: 0.3s;
-        position: relative;
-        width: 100%;
-        height: 42px;
-        min-height: 42px;
-        padding: 0 12px;
-        font-weight: 300;
-        -webkit-appearance: none;
-        outline: none;
-        border: 1px solid rgba(0, 0, 0, 0.2);
-        border-radius: 4px;
-        font-size: 14px;
-        z-index: 0;
       }
       &.has-error {
         .field-input {
@@ -423,7 +402,6 @@
       }
     }
   }
-
   @media screen and (max-width: 415px) {
     .time-picker-overlay {
       display: none;

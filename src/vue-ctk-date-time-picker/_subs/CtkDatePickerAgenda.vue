@@ -145,7 +145,7 @@
       noWeekendsDays: { type: Boolean, default: Boolean },
       autoClose: { type: Boolean, default: Boolean },
       enableButtonValidate: { type: Boolean, default: Boolean },
-      value: { type: [String, Object], default: String },
+      value: { type: [String, Object, Date], default: String },
       disabledDates: { type: Array, default: Array },
       dark: { type: Boolean, default: Boolean }
     },
@@ -263,25 +263,25 @@
         border-bottom-right-radius: 4px;
       }
       &-header {
-        background: dodgerblue;
-        color: #FFF;
-        padding: 10px 0 10px 10px;
+        background: #fff !important;
+        color: #000;
+        padding: 13px 0 0 15px !important;
         position: relative;
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
         .datepicker-year {
           opacity: 0.7;
-          margin-bottom: 10px;
+          margin-bottom: 3px;
           font-size: 14px;
           line-height: 14px;
           position: relative;
           height: 14px;
         }
         .datepicker-date, .datepicker-time, .datepicker-minute, .datepicker-hour {
-          font-size: 20px;
-          line-height: 20px;
+          font-size: 16px;
+          line-height: 16px;
           position: relative;
-          height: 20px;
+          height: 16px;
         }
         .datepicker-date {
           text-transform: capitalize;

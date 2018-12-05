@@ -65,10 +65,11 @@
               v-model="rangeValues"
               :dark="darkMode"
               :shortcuts-translation="shortcutsTranslation"
+              :without-range-shortcut="true"
               range-mode
               overlay-background
               enable-button-validate
-              color="purple"
+              color="#f76443"
               format="YYYY-MM-DD"
               formatted="ddd D MMM YYYY"
               label="Select range"
@@ -101,8 +102,9 @@
             <ctk-date-time-picker
               v-model="value2"
               :dark="darkMode"
+              :without-range-shortcut="true"
               format="YYYY-MM-DD"
-              color="#287696"
+              color="#f76443"
               formatted="ddd D MMM YYYY"
               label="Choose date"
               disable-time
@@ -250,7 +252,6 @@
 
 <script>
   import CtkDateTimePicker from './vue-ctk-date-time-picker/vue-ctk-date-time-picker.vue'
-
   export default {
     name: 'App',
     components: {
@@ -297,6 +298,20 @@
     margin: 0;
     min-height: 100%;
     min-width: 100%;
+  }
+  @font-face {
+    font-family: 'Graphik';
+    src: url('https://wizlocdn.blob.core.windows.net/frontend/fonts/subset-Graphik-Medium.woff2') format('woff2'),
+        url('https://wizlocdn.blob.core.windows.net/frontend/fonts/subset-Graphik-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Graphik_Normal';
+    src: url('https://wizlocdn.blob.core.windows.net/frontend/fonts/subset-Graphik-Regular.woff2') format('woff2'),
+        url('https://wizlocdn.blob.core.windows.net/frontend/fonts/subset-Graphik-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
   }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

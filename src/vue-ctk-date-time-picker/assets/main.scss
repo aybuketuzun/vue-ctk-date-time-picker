@@ -4,7 +4,7 @@
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   input, label, p, span {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-family: 'Graphik_Normal'
   }
   *, *::before, *::after {
     box-sizing: border-box;
@@ -43,7 +43,7 @@
   }
 
   .text-muted {
-    color: rgba(0,0,0,.54) !important;
+    color: #acb6bf !important;
   }
   .text-strong {
     font-weight: 500;

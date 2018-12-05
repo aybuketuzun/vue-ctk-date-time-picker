@@ -18,8 +18,8 @@ export default class Month {
     return Array.from(moment.range(this.start, this.end).by('days'))
   }
 
-  getFormatted () {
-    return this.start.format('MMMM YYYY')
+  getFormatted (locale) {
+    return this.start.locale(locale).format('MMMM YYYY')
   }
 
   getWeeks () {
@@ -33,6 +33,5 @@ export default class Month {
 }
 
 export const getWeekDays = function (locale) {
-  const firstDay = moment.localeData(locale).firstDayOfWeek()
-  return moment.weekdaysShort(firstDay === 1)
+  return moment.localeData(locale).weekdaysMin()
 }

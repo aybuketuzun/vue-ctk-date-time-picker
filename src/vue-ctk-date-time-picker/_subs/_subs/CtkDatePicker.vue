@@ -39,11 +39,11 @@
         v-for="(weekDay, index) in weekDays"
         :key="index"
         class="flex-1 text-muted fs-12 flex justify-content-center align-center">
-        {{ weekDay }}
+        {{ weekDay.toUpperCase() }}
       </div>
     </div>
     <div
-      :style="{height: (monthDays.length + weekDay) > 35 ? '250px' : '210px'}"
+      :style="{height: (monthDays.length + weekDay) > 35 ? '178px' : '150px'}"
       class="month-container">
       <transition-group :name="transitionDaysName">
         <div
@@ -133,7 +133,7 @@
     },
     methods: {
       getMonthFormatted () {
-        return this.month.getFormatted()
+        return this.month.getFormatted(this.locale)
       },
       isToday (day) {
         return moment(day.format('YYYY-MM-DD')).isSame(moment().format('YYYY-MM-DD'))
@@ -208,12 +208,12 @@
   @import "../../assets/animation.scss";
   #CtkDatePicker.datepicker-container {
     width: 290px;
-    padding: 0 5px;
     &.p-0 {
       padding: 0;
     }
     .datepicker-controls {
-      height: 56px;
+      height: 47px;
+      padding: 0 5px;
       .arrow-month {
         flex: 0 0 40px;
       }
@@ -248,12 +248,18 @@
       }
     }
     .datepicker-week {
-      height: 41px;
+      font-family: 'Graphik';
+      font-size: 12px;
+      background-color: #f4f6f9;
+      height: 32px;
       text-transform: capitalize;
+      padding: 0 5px;
+      margin-bottom: 4px;
     }
     .month-container {
       position: relative;
       overflow: hidden;
+      padding: 0 5px;
     }
     .datepicker-days {
       display: flex;
@@ -262,18 +268,17 @@
       flex-wrap: wrap;
       -ms-flex-wrap: wrap;
       .datepicker-day {
-        height: 41px;
+        height: 29px;
         flex-grow: 1;
         width: calc(100% / 7);
         position: relative;
         border: none;
         background: transparent;
-        font-size: 13px;
+        font-size: 14px;
         outline: none;
         &.enable {
           cursor: pointer;
         }
-
         &-effect, .datepicker-today{
           position: absolute;
           top: 0;
@@ -281,18 +286,15 @@
           left: 0;
           right: 0;
           margin: auto;
-          height: 30px;
-          width: 30px;
-
+          height: 26px;
+          width: 26px;
           border-radius: 50%;
           -webkit-transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
           transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
         }
-
         .datepicker-day-effect {
           margin: auto;
           opacity: 0.6;
-          background: dodgerblue;
           transform: scale(0);
         }
         .datepicker-today {
@@ -311,9 +313,9 @@
             opacity: 0.6;
           }
         }
-
         &.between {
           .datepicker-day-text {
+            padding-top: 3px;
             color: #FFF;
           }
           .datepicker-day-effect {
@@ -335,6 +337,7 @@
         }
         &.selected {
           .datepicker-day-text {
+            padding-top: 3px;
             color: #FFF;
           }
           .datepicker-day-effect {
